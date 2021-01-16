@@ -1,7 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 from tkinter import *
-from functools import lru_cache
 root = Tk()
 
 # trace of main answer
@@ -119,10 +118,9 @@ def button_sub():
     answer = answer - val
 
 
-# Saving computation power
+
 # function for multiplication
 
-@lru_cache(maxsize=128, typed=False)
 def button_mult():
 
     # getting value of textbox
@@ -134,6 +132,8 @@ def button_mult():
     e.delete(0, END)
     val = int(val)
     global answer, trace, count_mult
+    if answer == val:
+        return
 
     # tracing values from count
 
