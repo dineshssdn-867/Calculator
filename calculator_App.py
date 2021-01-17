@@ -71,16 +71,22 @@ def button_clear():
 # function for addition
 
 def Button_add():
-
     # getting value of textbox
 
     val = e.get()
+    # validation check
+    if val == '':
+        e.insert(0, 'Please provide a valid input')
+        return
 
     # deleting old value and overwriting on it
 
     e.delete(0, END)
     val = int(val)
     global answer, trace
+
+    if val is None:
+        e.insert(0, "Please give a value")
 
     # tracing value
 
@@ -102,6 +108,10 @@ def button_sub():
     # deleting old value and overwriting on it
 
     e.delete(0, END)
+    # validation check
+    if val == '':
+        e.insert(0, 'Please provide a valid input')
+        return
     val = int(val)
     global answer, trace, count_sub
     trace = '-'
@@ -130,6 +140,10 @@ def button_mult():
     # deleting old value and overwriting on it
 
     e.delete(0, END)
+    # validation check
+    if val == '':
+        e.insert(0, 'Please provide a valid input')
+        return
     val = int(val)
     global answer, trace, count_mult
     if answer == val:
@@ -155,6 +169,10 @@ def button_div():
     # getting value of textbox
 
     val = e.get()
+    # validation check
+    if val == '':
+        e.insert(0, 'Please provide a valid input')
+        return
 
     # deleting old value and overwriting on it
 
@@ -184,17 +202,20 @@ def button_div():
 # function for divison
 
 def button_equal():
-
     # getting value of textbox
-
     val = e.get()
-    val = int(val)
+
+    # validation check
+    if val == '':
+        e.insert(0, 'Please provide a valid input')
+        return
     global answer
+    val = int(val)
 
     # deleting old value and overwriting on it
 
     e.delete(0, END)
-
+    
     # final calcuation form traces
 
     if trace == '+':
