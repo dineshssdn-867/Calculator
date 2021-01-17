@@ -12,10 +12,6 @@ answer = 0
 
 trace = ''
 
-flag_sub = 0
-
-flag_mult = 0
-
 # trace of count of subtraction  operation
 
 count_sub = 0
@@ -93,13 +89,27 @@ def Button_add():
     # deleting old value and overwriting on it
 
     e.delete(0, END)
-    val = int(val)
+
+    # typescripting it to float
+
+    val = float(val)
+
+    # access to global variables
+
     global answer, trace
 
-    if val is None:
-        e.insert(0, 'Please give a value')
+    # computing previous calculations
 
-    # tracing value
+    if trace == '-':
+        answer = answer - val
+    elif trace == '*':
+        answer = answer * val
+    elif trace == '/':
+        answer = answer / val
+    elif trace == '+':
+        answer = answer + val
+
+    # tracing operation
 
     trace = '+'
 
@@ -111,6 +121,7 @@ def Button_add():
 # function for subtraction
 
 def button_sub():
+    global answer, trace, count_sub
 
     # getting value of textbox
 
@@ -125,22 +136,33 @@ def button_sub():
     if val == '':
         e.insert(0, 'Please provide a valid input')
         return
-    val = int(val)
-    global answer, trace, count_sub, flag_sub
-    flag_sub += 1
+
+    # typescripting it to float
+
+    val = float(val)
+
+    # computing previous calculations
+
+    if trace == '+':
+        answer = answer + val
+    elif trace == '*':
+        answer = answer * val
+    elif trace == '/':
+        answer = answer / val
+    elif trace == '-':
+        answer = answer - val
+
+    # tracing operation
+
     trace = '-'
 
     # tracing values from count
 
     if count_sub == 0 and answer == 0:
         answer = val - answer
+        trace = '-'
         count_sub = count_sub + 1
         return
-
-    # computing subtraction
-
-    if flag_sub % 2 == 0:
-        answer = answer - val
 
 
 # function for multiplication
@@ -160,9 +182,28 @@ def button_mult():
     if val == '':
         e.insert(0, 'Please provide a valid input')
         return
-    val = int(val)
-    global answer, trace, count_mult, flag_mult
-    flag_mult += 1
+
+    # typescripting it to float
+
+    val = float(val)
+
+    # access to global variables
+
+    global answer, trace, count_mult
+
+    # computing previous calculations
+
+    if trace == '+':
+        answer = answer + val
+    elif trace == '-':
+        answer = answer - val
+    elif trace == '/':
+        answer = answer / val
+    elif trace == '*':
+        answer = answer * val
+
+    # tracing operation
+
     trace = '*'
 
     # tracing values from count
@@ -172,11 +213,6 @@ def button_mult():
         count_mult = count_mult + 1
         trace = '*'
         return
-
-    # computing multiplication
-
-    if flag_mult % 2 == 0:
-        answer = answer * val
 
 
 # function for divison
@@ -196,26 +232,37 @@ def button_div():
     # deleting old value and overwriting on it
 
     e.delete(0, END)
-    val = int(val)
 
-    # Solving this app from exception
+    # typescripting it to float
 
-    if val == 0:
-        e.insert(0, 'Please provide a valid input')
-        return
+    val = float(val)
+
+    # access to global variables
+
     global answer, trace, count_div
+
+    # computing previous calculations
+
+    if trace == '+':
+        answer = answer + val
+    elif trace == '-':
+        answer = answer - val
+    elif trace == '*':
+        answer = answer * val
+    elif trace == '/':
+        answer = answer / val
 
     # tracing values from count
 
-    if count_div == 0:
+    if count_div == 0 and answer == 0:
         answer = val
         count_div = count_div + 1
         trace = '/'
         return
 
-    # computing divison
+    # tracing the operation
 
-    answer = answer / val
+    trace = '/'
 
 
 # function for divison
@@ -231,8 +278,14 @@ def button_equal():
     if val == '':
         e.insert(0, 'Please provide a valid input')
         return
+
+    # typescripting it to float
+
+    val = float(val)
+
+    # access to global variables
+
     global answer
-    val = int(val)
 
     # deleting old value and overwriting on it
 
