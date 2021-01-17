@@ -1,5 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+
 from tkinter import *
 root = Tk()
 
@@ -10,6 +11,10 @@ answer = 0
 # trace of operation
 
 trace = ''
+
+flag_sub = 0
+
+flag_mult = 0
 
 # trace of count of subtraction  operation
 
@@ -59,22 +64,28 @@ def button_clear():
 
     # clearing all traces or setting it to old default value
 
-    global answer, trace, count_sub, count_div, count_mult
+    global answer, trace, count_sub, count_div, count_mult, flag_sub, \
+        flag_mult
     answer = 0
     trace = ''
     count_sub = 0
     count_mult = 0
     count_div = 0
+    flag_sub = 0
+    flag_mult = 0
     e.delete(0, END)
 
 
 # function for addition
 
 def Button_add():
+
     # getting value of textbox
 
     val = e.get()
+
     # validation check
+
     if val == '':
         e.insert(0, 'Please provide a valid input')
         return
@@ -86,7 +97,7 @@ def Button_add():
     global answer, trace
 
     if val is None:
-        e.insert(0, "Please give a value")
+        e.insert(0, 'Please give a value')
 
     # tracing value
 
@@ -108,25 +119,28 @@ def button_sub():
     # deleting old value and overwriting on it
 
     e.delete(0, END)
+
     # validation check
+
     if val == '':
         e.insert(0, 'Please provide a valid input')
         return
     val = int(val)
-    global answer, trace, count_sub
+    global answer, trace, count_sub, flag_sub
+    flag_sub += 1
     trace = '-'
 
     # tracing values from count
 
-    if count_sub == 0:
+    if count_sub == 0 and answer == 0:
         answer = val - answer
         count_sub = count_sub + 1
         return
 
     # computing subtraction
 
-    answer = answer - val
-
+    if flag_sub % 2 == 0:
+        answer = answer - val
 
 
 # function for multiplication
@@ -140,18 +154,20 @@ def button_mult():
     # deleting old value and overwriting on it
 
     e.delete(0, END)
+
     # validation check
+
     if val == '':
         e.insert(0, 'Please provide a valid input')
         return
     val = int(val)
-    global answer, trace, count_mult
-    if answer == val:
-        return
+    global answer, trace, count_mult, flag_mult
+    flag_mult += 1
+    trace = '*'
 
     # tracing values from count
 
-    if count_mult == 0:
+    if count_mult == 0 and answer == 0:
         answer = 1 * val
         count_mult = count_mult + 1
         trace = '*'
@@ -159,7 +175,8 @@ def button_mult():
 
     # computing multiplication
 
-    answer = answer * val
+    if flag_mult % 2 == 0:
+        answer = answer * val
 
 
 # function for divison
@@ -169,7 +186,9 @@ def button_div():
     # getting value of textbox
 
     val = e.get()
+
     # validation check
+
     if val == '':
         e.insert(0, 'Please provide a valid input')
         return
@@ -202,10 +221,13 @@ def button_div():
 # function for divison
 
 def button_equal():
+
     # getting value of textbox
+
     val = e.get()
 
     # validation check
+
     if val == '':
         e.insert(0, 'Please provide a valid input')
         return
@@ -215,7 +237,7 @@ def button_equal():
     # deleting old value and overwriting on it
 
     e.delete(0, END)
-    
+
     # final calcuation form traces
 
     if trace == '+':
