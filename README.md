@@ -1,2 +1,1 @@
-# Calculator
-This is a calculator project which is a replica of calculator that we use in daily life in our systems. 
+A calculator is a machine which allows people to do math operations more easily. For example, most calculators will add, subtract, multiply, and divide. Some also do square roots, and more complex calculators can help with calculus and draw function graphs. Calculators are found everywhere.
